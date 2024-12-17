@@ -1,0 +1,47 @@
+analyze_product_metrics:
+  task: >
+    Analyze the product metrics {metrics} and provide a detailed breakdown
+    including growth rates, key performance indicators, and risk factors.
+    Format the response exactly according to the specified schema.
+  inputs:
+    metrics:
+      type: string
+  outputs:
+    analysis:
+      type: object
+      properties:
+        growth_metrics:
+          type: object
+          properties:
+            revenue_growth:
+              type: number
+            user_growth:
+              type: number
+        risk_assessment:
+          type: array
+          items:
+            type: object
+            properties:
+              risk_factor:
+                type: string
+              severity:
+                type: string
+                enum: ["low", "medium", "high"]
+              impact:
+                type: number
+                minimum: 0
+                maximum: 1
+        recommendations:
+          type: array
+          items:
+            type: object
+            properties:
+              action:
+                type: string
+              priority:
+                type: integer
+                minimum: 1
+                maximum: 5
+              expected_impact:
+                type: string
+  max_retries: 4  # Explicitly set higher retries due to complex schema

@@ -1,0 +1,126 @@
+generate_fake_data:
+  task: >
+    Generate a synthetic dataset of {transaction_count} sales transactions.
+    Each transaction should have:
+    - transaction_id (string)
+    - date (string in YYYY-MM-DD format)
+    - product_name (string)
+    - amount (number)
+    - customer_name (string)
+  inputs:
+    transaction_count:
+      type: integer
+  outputs:
+    sales_data:
+      type: array
+      items:
+        type: object
+        properties:
+          transaction_id:
+            type: string
+          date:
+            type: string
+          product_name:
+            type: string
+          amount:
+            type: number
+          customer_name:
+            type: string
+
+prepare_data:
+  task: >
+    Clean and prepare the sales data {sales_data} by:
+    1. Removing any duplicate transactions
+    2. Sorting by date
+    3. Validating date formats
+    4. Ensuring all amounts are positive numbers
+  inputs:
+    sales_data:
+      type: array
+  outputs:
+    cleaned_data:
+      type: array
+      items:
+        type: object
+
+calculate_statistics:
+  task: >
+    Calculate the following statistics from the {cleaned_data}:
+    1. Total sales amount
+    2. Average transaction value
+    3. Number of unique customers
+    4. Most popular product
+    5. Sales by date
+  inputs:
+    cleaned_data:
+      type: array
+  outputs:
+    statistics:
+      type: object
+      properties:
+        total_sales:
+          type: number
+        avg_transaction:
+          type: number
+        unique_customers:
+          type: integer
+        popular_product:
+          type: string
+        sales_by_date:
+          type: object
+
+identify_top_performers:
+  task: >
+    Based on the {statistics}, identify:
+    1. Top 3 customers by total purchase amount
+    2. Top 3 products by sales volume
+    3. Best performing day
+  inputs:
+    statistics:
+      type: object
+  outputs:
+    top_performers:
+      type: object
+      properties:
+        top_customers:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              total_amount:
+                type: number
+        top_products:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              sales_count:
+                type: integer
+        best_day:
+          type: string
+
+generate_report:
+  task: >
+    Create a summary report using the {statistics} and {top_performers} data.
+    Include insights about sales trends, customer behavior, and product performance.
+  inputs:
+    statistics:
+      type: object
+    top_performers:
+      type: object
+  outputs:
+    report:
+      type: object
+      properties:
+        summary:
+          type: string
+        recommendations:
+          type: array
+          items:
+            type: string
+        performance_metrics:
+          type: object

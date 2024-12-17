@@ -1,0 +1,148 @@
+generate_team_members:
+  task: >
+    Generate a synthetic team of {team_size} members.
+    Each member should have:
+    - `name`: A random name.
+    - `skills`: A random subset of ["Python", "Data Analysis", "Web Development", "Design", "Testing"].
+    - `current_workload`: A random number between 0 and 5.
+  inputs:
+    team_size:
+      type: integer
+  outputs:
+    team_members:
+      type: array
+      items:
+        type: object
+        properties:
+          name:
+            type: string
+          skills:
+            type: array
+            items:
+              type: string
+          current_workload:
+            type: integer
+
+generate_tasks:
+  task: >
+    Generate a synthetic list of {task_count} tasks.
+    Each task should have:
+    - `task_name`: A unique name.
+    - `required_skills`: A random subset of ["Python", "Data Analysis", "Web Development", "Design", "Testing"].
+    - `estimated_time`: A random number between 1 and 10 hours.
+  inputs:
+    task_count:
+      type: integer
+  outputs:
+    tasks:
+      type: array
+      items:
+        type: object
+        properties:
+          task_name:
+            type: string
+          required_skills:
+            type: array
+            items:
+              type: string
+          estimated_time:
+            type: number
+
+assign_tasks:
+  task: >
+    Assign tasks {tasks} to team members {team_members}.
+    Match tasks to team members based on skill compatibility and current workload.
+    Return a mapping of tasks to team members.
+  inputs:
+    tasks:
+      type: array
+      items:
+        type: object
+        properties:
+          task_name:
+            type: string
+          required_skills:
+            type: array
+            items:
+              type: string
+          estimated_time:
+            type: number
+    team_members:
+      type: array
+      items:
+        type: object
+        properties:
+          name:
+            type: string
+          skills:
+            type: array
+            items:
+              type: string
+          current_workload:
+            type: integer
+  outputs:
+    task_assignments:
+      type: array
+      items:
+        type: object
+        properties:
+          task_name:
+            type: string
+          assigned_to:
+            type: string
+
+track_performance:
+  task: >
+    Simulate task completion for the task assignments {task_assignments}.
+    Generate performance metrics:
+    - `time_taken`: A random number between 0.5x and 1.5x of the estimated time.
+    - `quality_score`: A random score between 1 and 10.
+  inputs:
+    task_assignments:
+      type: array
+      items:
+        type: object
+        properties:
+          task_name:
+            type: string
+          assigned_to:
+            type: string
+  outputs:
+    performance_log:
+      type: array
+      items:
+        type: object
+        properties:
+          task_name:
+            type: string
+          assigned_to:
+            type: string
+          time_taken:
+            type: number
+          quality_score:
+            type: number
+
+generate_report:
+  task: >
+    Generate a report based on the performance log {performance_log}.
+    Include:
+    - Completed tasks and by whom.
+    - Average quality score and time efficiency.
+    - Recommendations for improving workload distribution and skill development.
+  inputs:
+    performance_log:
+      type: array
+      items:
+        type: object
+        properties:
+          task_name:
+            type: string
+          assigned_to:
+            type: string
+          time_taken:
+            type: number
+          quality_score:
+            type: number
+  outputs:
+    report:
+      type: string

@@ -1,0 +1,31 @@
+generate_numbers:
+  task: >
+    Generate a list of {count} random integers between {min_value} and {max_value}.
+  inputs:
+    count:
+      type: integer
+    min_value:
+      type: integer
+    max_value:
+      type: integer
+  outputs:
+    numbers:
+      type: array
+      items:
+        type: integer
+calculate_statistics:
+  task: >
+    Given the list of numbers {numbers}, calculate the mean and median. 
+  inputs:
+    numbers:
+      type: array
+      items:
+        type: integer
+  outputs:
+    statistics:
+      type: object
+      properties:
+        mean:
+          type: number
+        median:
+          type: number

@@ -1,0 +1,29 @@
+name: Basic Workflow
+description: A simple workflow for testing purposes
+inputs:
+  query:
+    type: string
+    description: The input query
+
+steps:
+  step1:
+    name: Basic Processing
+    description: Process the input query
+    input_schema:
+      type: object
+      properties:
+        query:
+          type: string
+    output_schema:
+      type: object
+      properties:
+        result:
+          type: string
+    prompt: |
+      Process the following query and return a JSON response with a 'result' field:
+      Query: {query}
+      
+      Response format:
+      {
+        "result": "processed result"
+      }

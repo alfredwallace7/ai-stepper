@@ -1,0 +1,24 @@
+addition:
+  task: >
+    Calculate the sum of {user_request}.
+  inputs:
+    user_request: str
+  outputs:
+    sum: float
+
+square:
+  task: >
+    Calculate the square of {sum}.
+  inputs:
+    sum: float
+  outputs:
+    result: float
+
+multiply:
+  task: >
+    Calculate the product of {user_request} and {result}.
+  inputs:
+    user_request: float
+    result: float
+  outputs:
+    product: float

@@ -1,0 +1,9 @@
+-r requirements.txt
+
+# Test dependencies
+pytest==8.3.3
+pytest-mock==3.14.0
+
+# Build and distribution
+build==1.2.2.post1
+twine==5.1.1

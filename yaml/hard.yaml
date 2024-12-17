@@ -1,0 +1,54 @@
+fetch_data:
+  task: >
+    Generate a list of {count} random names, each containing a first and last name.
+  inputs:
+    count: int
+  outputs:
+    names:
+      type: array
+      items:
+        type: object
+        properties:
+          first_name:
+            type: string
+          last_name:
+            type: string
+
+capitalize_names:
+  task: >
+    Given the list of names {names}, capitalize the first and last names of each person.
+  inputs:
+    names: array
+  outputs:
+    capitalized_names:
+      type: array
+      items:
+        type: object
+        properties:
+          first_name:
+            type: string
+            pattern: "^[A-Z][a-z]+$"
+          last_name:
+            type: string
+            pattern: "^[A-Z][a-z]+$"
+
+longest_name:
+  task: >
+    Given the list of capitalized names {capitalized_names}, find the person
+    with the longest full name (including spaces).
+    Output the result as a JSON object:
+    {
+        "full_name": <longest_full_name>,
+        "length": <length_of_full_name>
+    }
+    Do not include any other text.
+  inputs:
+    capitalized_names: array
+  outputs:
+    longest_name:
+      type: object
+      properties:
+        full_name:
+          type: string
+        length:
+          type: integer

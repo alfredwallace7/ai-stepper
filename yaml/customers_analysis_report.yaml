@@ -1,0 +1,165 @@
+generate_feedback:
+  task: >
+    Generate a synthetic dataset of {feedback_count} customer feedback entries for products
+    {products}. Each entry should include:
+    - `product`: Randomly selected from the list of products.
+    - `rating`: A random integer between 1 and 5.
+    - `comment`: A realistic comment reflecting the rating.
+  inputs:
+    feedback_count:
+      type: integer
+    products:
+      type: array
+      items:
+        type: string
+  outputs:
+    feedback:
+      type: array
+      items:
+        type: object
+        properties:
+          product:
+            type: string
+          rating:
+            type: integer
+          comment:
+            type: string
+
+categorize_feedback:
+  task: >
+    Analyze the customer feedback {feedback} and identify recurring themes (e.g., "price",
+    "quality", "delivery"). Categorize feedback by themes for each product.
+  inputs:
+    feedback:
+      type: array
+      items:
+        type: object
+        properties:
+          product:
+            type: string
+          rating:
+            type: integer
+          comment:
+            type: string
+  outputs:
+    categorized_feedback:
+      type: object
+      properties:
+        product_themes:
+          type: array
+          items:
+            type: object
+            properties:
+              product:
+                type: string
+              themes:
+                type: array
+                items:
+                  type: string
+
+analyze_sentiment:
+  task: >
+    Perform sentiment analysis on the categorized feedback {categorized_feedback}.
+    Determine whether each theme has a positive, negative, or neutral sentiment based
+    on the associated comments.
+  inputs:
+    categorized_feedback:
+      type: object
+      properties:
+        product_themes:
+          type: array
+          items:
+            type: object
+            properties:
+              product:
+                type: string
+              themes:
+                type: array
+                items:
+                  type: string
+  outputs:
+    sentiment_analysis:
+      type: object
+      properties:
+        product_sentiments:
+          type: array
+          items:
+            type: object
+            properties:
+              product:
+                type: string
+              theme_sentiments:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    theme:
+                      type: string
+                    sentiment:
+                      type: string
+
+prioritize_improvements:
+  task: >
+    Based on the sentiment analysis {sentiment_analysis}, prioritize the most critical
+    areas for improvement for each product. Consider the sentiment and frequency of themes.
+  inputs:
+    sentiment_analysis:
+      type: object
+      properties:
+        product_sentiments:
+          type: array
+          items:
+            type: object
+            properties:
+              product:
+                type: string
+              theme_sentiments:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    theme:
+                      type: string
+                    sentiment:
+                      type: string
+  outputs:
+    prioritized_improvements:
+      type: object
+      properties:
+        improvement_plan:
+          type: array
+          items:
+            type: object
+            properties:
+              product:
+                type: string
+              improvements:
+                type: array
+                items:
+                  type: string
+
+generate_report:
+  task: >
+    Generate a detailed report summarizing the findings from the prioritized improvements
+    {prioritized_improvements}. Include:
+    - Key themes and sentiments for each product.
+    - Specific recommendations for product teams.
+    - A high-level summary of customer sentiment.
+  inputs:
+    prioritized_improvements:
+      type: object
+      properties:
+        improvement_plan:
+          type: array
+          items:
+            type: object
+            properties:
+              product:
+                type: string
+              improvements:
+                type: array
+                items:
+                  type: string
+  outputs:
+    report:
+      type: string

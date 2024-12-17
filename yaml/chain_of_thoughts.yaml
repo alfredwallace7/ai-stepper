@@ -1,0 +1,60 @@
+direct_answer:
+  task: >
+    {query}
+  inputs:
+    query:
+      type: string
+  outputs:
+    final_answer:
+      type: string
+
+define_problem:
+  task: >
+    Break down the problem statement {query} into its core components. Identify what needs to be solved or answered and
+    list these subproblems explicitly.
+  inputs:
+    query:
+      type: string
+  outputs:
+    subproblems:
+      type: array
+      items:
+        type: string
+
+generate_subsolutions:
+  task: >
+    Solve each subproblem {subproblems} step by step. For each subproblem, provide a concise solution or analysis.
+    If the subproblem cannot be solved directly, explain why.
+  inputs:
+    subproblems:
+      type: array
+      items:
+        type: string
+  outputs:
+    subsolutions:
+      type: array
+      items:
+        type: object
+        properties:
+          subproblem:
+            type: string
+          solution:
+            type: string
+
+combine_results:
+  task: >
+    Combine the solutions to the subproblems {subsolutions} into a coherent final answer to the original query.
+    Ensure the reasoning flows logically, and the answer directly addresses the query.
+  inputs:
+    subsolutions:
+      type: array
+      items:
+        type: object
+        properties:
+          subproblem:
+            type: string
+          solution:
+            type: string
+  outputs:
+    final_answer:
+      type: string
