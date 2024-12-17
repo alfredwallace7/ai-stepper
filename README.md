@@ -16,6 +16,7 @@ If you're looking for a straightforward way to create sequential AI workflows wi
 ## Key Features
 
 - **LLM Agnostic**: Works with any LLM through litellm annotations (OpenAI, Anthropic, local models, etc.)
+- **Wide Compatibility**: Compatible with LLMs that don't support function calling.
 - **Full Prompt Control**: Define exactly how your LLM should behave at each step
 - **Sequential Execution**: Each step's output is automatically available as input for subsequent steps
 - **YAML-Driven Workflows**: Define your entire workflow in a simple YAML file

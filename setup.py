@@ -8,7 +8,7 @@ with open("requirements.txt", "r", encoding="utf-8") as fh:
 
 setup(
     name="ai-stepper",
-    version="0.1.3",
+    version="0.1.4",
     author="alfredwallace7",
     author_email="alfred.wallace@netcraft.fr",
     description="A flexible Python framework for creating step-by-step AI workflows",
